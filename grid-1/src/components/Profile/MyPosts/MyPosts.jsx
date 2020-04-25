@@ -4,17 +4,31 @@ import Post from './Post/Post';
 
 const MyPosts = (props) => {
 
-    let postsElements = props.posts.map (p =><Post message={p.message} like={p.like}/>)
+    let postsElements = props.posts.map(p => <Post message={p.message} like={p.like}/>);
 
+    let newPostElement = React.createRef();
+
+    let addPost = () => {
+        props.dispatch({type: 'ADD_POST'});
+    };
+
+    let onPostChange = () => {
+        let text = newPostElement.current.value; //присваеваем переменной text обращение к ссылке со значение value
+        let action = {type: 'APPDATA-NEW-POST-TEXT', newText: text};
+        props.dispatch(action);
+    }
+    debugger;
     return (
         <div className={s.postsBlock}>
             <h3>My posts.</h3>
             <div>
                 <div>
-                    <textarea></textarea>
+                    <textarea onChange={onPostChange}
+                              ref={newPostElement}
+                              value={props.newPostText}/>
                 </div>
                 <div>
-                    <button>Add post</button>
+                    <button onClick={addPost}>Add post</button>
                 </div>
             </div>
 
