@@ -1,5 +1,5 @@
 import './index.css';
-import store from "./redux/state";
+import store from "./redux/store";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -13,9 +13,6 @@ let render = (state) => {
             <App
                 state={state}
                 dispatch={store.dispatch.bind(store)}
-
-                sentMessage={store.sentMessage.bind(store)}
-                appdateNewMessageText={store.appdateNewMessageText.bind(store)}
             />
         </BrowserRouter>, document.getElementById('root'));
 }

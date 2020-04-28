@@ -1,3 +1,7 @@
+import profileReducer from "./profileReducer";
+import dialogsReducer from "./dialogsReducer";
+import navbarReducer from "./navbarReducer";
+
 let store = {
     _state: {
         profilePage: {
@@ -16,7 +20,7 @@ let store = {
                 {id: 1, message: 'Hi'},
                 {id: 2, message: 'Hello'}
             ],
-            newMessageText: 'Change me'
+            newMessageText: ''
         },
         navbar: {
             friends: [
@@ -37,36 +41,12 @@ let store = {
         return this._state;
     },
 
-    sentMessage() {
-        let newMessage = {
-            id: 3,
-            message: this._state.dialogsPage.newMessageText,
-        };
-        this._state.dialogsPage.messages.push(newMessage);
-        this._state.dialogsPage.newMessageText = '';
-        this._rerender(this._state);
-    },
-    appdateNewMessageText(newText) {
-        this._state.dialogsPage.newMessageText = newText;
-        this._rerender(this._state);
-    },
-
     dispatch(action) {
-        if (action.type === 'ADD_POST') {
-            let newPost = {
-                id: 5,
-                message: this._state.profilePage.newPostText,
-                like: 0
-            };
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = '';
-            this._rerender(this._state);
-        } else if (action.type === 'APPDATA-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newText;
-            this._rerender(this._state);
-        }
-    }
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
 
+        this._rerender(this._state);
+    },
 }
 
 export default store;

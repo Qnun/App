@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Friend = (props) => {
+const Friend = (props) => { debugger;
     return (
         <div>
             <div>

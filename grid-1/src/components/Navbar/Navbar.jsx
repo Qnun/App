@@ -1,10 +1,10 @@
 import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
-import Post from "../Profile/MyPosts/Post/Post";
 import Friend from "./Friend/Friend";
 
 const Navbar = (props) => {
+    debugger;
     let friendElements = props.state.friends.map(f => <Friend friend={f.friend}/>)
 
     return (
