@@ -6,20 +6,19 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from "react-router-dom";
+import  {Provider} from "./StoreContext";
 
 let render = (state) => {
     ReactDOM.render(
         <BrowserRouter>
-            <App
-                state={state}
-                dispatch={store.dispatch.bind(store)}
-                store={store}
-            />
+            <Provider store={store}>
+                <App/>
+            </Provider>
         </BrowserRouter>, document.getElementById('root'));
 }
 render(store.getState());
 
-store.subscribe( () =>{
+store.subscribe(() => {
     let state = store.getState();
     render(state);
 });

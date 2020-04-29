@@ -5,7 +5,7 @@ const Friend = (props) => {
         <div>
             <div>
                 <img src="https://www.proza.ru/pics/2019/03/26/916.jpg"/>
-                <div>{props.friend}</div>
+                {/*<div>{props.friend}</div>*/}
             </div>
         </div>
     );
