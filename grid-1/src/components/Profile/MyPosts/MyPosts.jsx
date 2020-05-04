@@ -14,7 +14,7 @@ const MyPosts = (props) => {
 
     let onPostChange = () => {
         let text = newPostElement.current.value; //присваеваем переменной text обращение к ссылке со значение value
-        props.updateNewPostText(text);
+        props.PostChange(text);
 
     }
 
