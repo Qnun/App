@@ -22,7 +22,7 @@ const Dialogs = (props) => {
         let text = e.target.value;
         props.onMessageChange(text);
     }
-debugger
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItem}>
