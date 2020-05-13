@@ -5,9 +5,13 @@
     margin: 5px;
 
 }
+.selectPage{
+    font-weight: bolder;
+    text-decoration: underline;
+}
 .item{
     grid-area: i;
-    background-color: chartreuse;
+    background-color: white;
     padding: 5px;
 
 }
