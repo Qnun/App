@@ -32,7 +32,7 @@ export const profileAPI = {
             .then(response => response.data)
     },
     updateStatus(status) {
-        return instance.put(`profile/status` + {status})
+        return instance.put(`profile/status`, { status })
             .then(response => response.data)
     },
 };
