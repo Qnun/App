@@ -1,5 +1,7 @@
 import React from 'react';
 import {Field, reduxForm} from "redux-form";
+import {compose} from "redux";
+import {connect} from "react-redux";
 
 const LoginForm = (props) => {
     return (
@@ -33,4 +35,10 @@ const Login = (props) => {
     </div>
 };
 
-export default Login;
+const mapStateToProps = (state) =>{
+    return{
+
+    }
+}
+
+export default compose(connect(mapStateToProps))(Login)

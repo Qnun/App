@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import DialogsItem from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
-import {Redirect} from "react-router-dom";
+import {Field, reduxForm} from "redux-form";
 
 
 const Dialogs = (props) => {
@@ -12,16 +12,8 @@ const Dialogs = (props) => {
     let messagesElements =
         props.messages.map(m => <Message text={m.message} id={m.id}/>);
 
-    let newMessageElement = React.createRef();
-    let newMessageText = props.newMessageText;
-
-    let onSentMessage = () => {
-        props.sentMessage();
-    }
-
-    let onMessageChange = (e) => {
-        let text = e.target.value;
-        props.onMessageChange(text);
+    let addNewMessage = (values) => {
+        props.sentMessage(values.newMessageBody);
     }
 
     return (
@@ -33,21 +25,30 @@ const Dialogs = (props) => {
                 <div>{messagesElements}</div>
 
                 <div className={s.sentElements}>
-                    <div>
-                        <textarea onChange={onMessageChange}
-                                  ref={newMessageElement}
-                                  value={newMessageText}
-                                  placeholder='Use me!'
-                        />
-                    </div>
-                    <div>
-                        <button onClick={onSentMessage}>Sent message</button>
-                    </div>
+                    <DialogsReduxForm onSubmit={addNewMessage}/>
                 </div>
             </div>
 
         </div>
-    );
+    )
 }
+
+const DialogsForm = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field component="textarea"
+                       name="newMessageBody"
+                       placeholder="Use me!"
+                />
+            </div>
+            <div>
+                <button>Sent message</button>
+            </div>
+        </form>
+    )
+}
+
+const DialogsReduxForm = reduxForm({form:"dialogMessage"})(DialogsForm)
 
 export default Dialogs;
