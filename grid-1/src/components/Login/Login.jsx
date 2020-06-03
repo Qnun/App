@@ -4,17 +4,20 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {Input} from "../common/FormsControls/FormsControls";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
+import {login, logout} from "../../redux/authReducer";
+import {Redirect} from "react-router-dom";
 
-const maxLength10 = maxLengthCreator(10);
+const maxLength30 = maxLengthCreator(30);
 
 const LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field component={Input} name={"login"} validate={[required, maxLength10]} placeholder={"Login"} />
+                <Field component={Input} name={"email"} validate={[required, maxLength30]} placeholder={"Email"}/>
             </div>
             <div>
-                <Field component={Input} name={"password"} validate={[required, maxLength10]} placeholder={"Password"}/>
+                <Field component={Input} name={"password"} validate={[required, maxLength30]} placeholder={"Password"}
+                       type={"password"}/>
             </div>
             <div>
                 <Field component={Input} name={"rememberMe"} type={"checkbox"}/> Remember me
@@ -23,26 +26,27 @@ const LoginForm = (props) => {
                 <button>Login</button>
             </div>
         </form>
-        )
+    )
 };
 
-const LoginReduxForm = reduxForm ({form:'login'})(LoginForm)
+const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
 
 const Login = (props) => {
-    const onSubmit = (formData) =>{
-
+    const onSubmit = (formData) => {
+        props.login(formData.email, formData.password, formData.rememberMe)
     }
 
+    if (props.isAuth) {
+        return <Redirect to={"/profile"}/>
+    }
     return <div>
         <h1>Login</h1>
-        <LoginReduxForm onSubmit={onSubmit} />
+        <LoginReduxForm onSubmit={onSubmit}/>
     </div>
 };
 
-const mapStateToProps = (state) =>{
-    return{
+const mapStateToProps = (state) => ({
+    isAuth: state.auth.isAuth
+})
 
-    }
-}
-
-export default compose(connect(mapStateToProps))(Login)
+export default compose(connect(mapStateToProps, {login}))(Login)
