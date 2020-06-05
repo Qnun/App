@@ -1,4 +1,4 @@
-import {getAuthMe} from "./authReducer";
+import {getAuthMe} from "./auth-reducer";
 
 const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
 
